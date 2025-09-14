@@ -1,5 +1,7 @@
 """fast-agent - An MCP native agent application framework"""
 
+from typing import TYPE_CHECKING
+
 # Configuration and settings (safe - pure Pydantic models)
 from fast_agent.config import (
     AnthropicSettings,
@@ -55,10 +57,6 @@ def __getattr__(name: str):
         from fast_agent.event_progress import ProgressEvent
 
         return ProgressEvent
-    elif name == "ToolAgentSynchronous":
-        from fast_agent.agents.tool_agent import ToolAgent
-
-        return ToolAgent
     elif name == "LlmAgent":
         from fast_agent.agents.llm_agent import LlmAgent
 
@@ -118,7 +116,6 @@ __all__ = [
     "LlmStopReason",
     "RequestParams",
     # Agents (lazy loaded)
-    "ToolAgentSynchronous",
     "LlmAgent",
     "LlmDecorator",
     "ToolAgent",
